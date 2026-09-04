@@ -1,5 +1,5 @@
 # zugar
-a peer-to-peer renting system
+A peer-to-peer renting system
 
 # Peer-to-Peer Rental Marketplace
 
@@ -151,3 +151,4 @@ Suggested price: ৳1,000/day
 Rental duration: 3 days
 
 Renter's offer: ৳2,400 total
+```
