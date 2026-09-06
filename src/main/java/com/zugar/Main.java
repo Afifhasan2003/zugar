@@ -7,6 +7,11 @@ import javafx.stage.Stage;
 
 public final class Main extends Application {
     @Override
+    public void init() throws Exception {
+        com.zugar.db.DatabaseManager.initializeDatabase();
+    }
+
+    @Override
     public void start(Stage stage) {
         stage.setTitle("Zugar");
         stage.setScene(new Scene(new Label("Zugar"), 800, 600));

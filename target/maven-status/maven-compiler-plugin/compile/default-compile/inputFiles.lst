@@ -1,1 +1,12 @@
-/home/saikat/projects/zugar/src/main/java/com/zugar/Main.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/Main.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/db/DatabaseManager.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/model/ProjectFile.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/model/User.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/repository/ProjectFileRepository.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/repository/ProjectFileRepositoryImpl.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/repository/UserRepository.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/repository/UserRepositoryImpl.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/service/AuthService.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/service/JwtService.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/service/PasswordHasher.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/service/ProjectFileService.java
