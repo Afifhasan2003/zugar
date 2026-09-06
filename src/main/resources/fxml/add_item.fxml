@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.zugar.controller.AddItemController"
+      spacing="20" styleClass="root">
+    <padding>
+        <Insets top="24" right="32" bottom="24" left="32"/>
+    </padding>
+    <Label text="List an Item for Rent" styleClass="title-label"/>
+    <Label fx:id="statusLabel" text="" style="-fx-font-weight: bold;"/>
+    <VBox styleClass="card" spacing="16">
+        <GridPane hgap="16" vgap="16">
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Item Title" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="titleField" promptText="e.g. Sony A7 III Camera"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Category" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="categoryBox" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Daily Price (৳)" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="priceField" promptText="1000"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Security Deposit (৳)" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="depositField" promptText="5000"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <Label text="Condition" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="conditionField" promptText="e.g. Like New / Excellent"/>
+            </VBox>
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label text="Location" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="locationField" promptText="e.g. Dhaka University Area"/>
+            </VBox>
+        </GridPane>
+        <VBox spacing="6">
+            <Label text="Access Restrictions" style="-fx-font-weight: bold;"/>
+            <ComboBox fx:id="restrictionBox" maxWidth="Infinity"/>
+        </VBox>
+        <VBox spacing="6">
+            <Label text="Description" style="-fx-font-weight: bold;"/>
+            <TextArea fx:id="descriptionArea" prefRowCount="4" promptText="Provide details about your item..."/>
+        </VBox>
+        <Button text="Publish Rental Listing" onAction="#handlePublish" styleClass="primary-button"/>
+    </VBox>
+</VBox>
