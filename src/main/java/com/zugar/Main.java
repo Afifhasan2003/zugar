@@ -3,6 +3,7 @@ package com.zugar;
 import com.zugar.controller.LoginController;
 import com.zugar.controller.MainLayoutController;
 import com.zugar.db.DatabaseManager;
+import com.zugar.factory.ViewFactory;
 import com.zugar.model.User;
 import com.zugar.repository.RentalRepository;
 import com.zugar.repository.RentalRepositoryImpl;
@@ -11,8 +12,6 @@ import com.zugar.repository.UserRepositoryImpl;
 import com.zugar.service.AuthService;
 import com.zugar.service.JwtService;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -39,33 +38,23 @@ public final class Main extends Application {
     }
 
     private void showLoginView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-            Parent root = loader.load();
-            LoginController controller = loader.getController();
-            controller.init(authService, this::showMainLayout);
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/login.fxml");
+        LoginController controller = res.getController();
+        controller.init(authService, this::showMainLayout);
 
-            Scene scene = new Scene(root, 900, 650);
-            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-            primaryStage.setScene(scene);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Scene scene = new Scene(res.getRoot(), 900, 650);
+        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        primaryStage.setScene(scene);
     }
 
     private void showMainLayout(User user) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main_layout.fxml"));
-            Parent root = loader.load();
-            MainLayoutController controller = loader.getController();
-            controller.init(authService, rentalRepository, user, this::showLoginView);
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/main_layout.fxml");
+        MainLayoutController controller = res.getController();
+        controller.init(authService, rentalRepository, user, this::showLoginView);
 
-            Scene scene = new Scene(root, 1000, 700);
-            scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-            primaryStage.setScene(scene);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Scene scene = new Scene(res.getRoot(), 1000, 700);
+        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        primaryStage.setScene(scene);
     }
 
     public static void main(String[] args) {

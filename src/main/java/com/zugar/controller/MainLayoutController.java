@@ -1,11 +1,10 @@
 package com.zugar.controller;
 
+import com.zugar.factory.ViewFactory;
 import com.zugar.model.User;
 import com.zugar.repository.RentalRepository;
 import com.zugar.service.AuthService;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -35,58 +34,38 @@ public class MainLayoutController {
 
     @FXML
     public void showCatalog() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/catalog.fxml"));
-            Node view = loader.load();
-            CatalogController controller = loader.getController();
-            controller.init(rentalRepository, currentUser);
-            mainContainer.setCenter(view);
-            updateNavState(catalogNavBtn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/catalog.fxml");
+        CatalogController controller = res.getController();
+        controller.init(rentalRepository, currentUser);
+        mainContainer.setCenter(res.getRoot());
+        updateNavState(catalogNavBtn);
     }
 
     @FXML
     public void showAddItem() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add_item.fxml"));
-            Node view = loader.load();
-            AddItemController controller = loader.getController();
-            controller.init(rentalRepository, currentUser, this::showCatalog);
-            mainContainer.setCenter(view);
-            updateNavState(addItemNavBtn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/add_item.fxml");
+        AddItemController controller = res.getController();
+        controller.init(rentalRepository, currentUser, this::showCatalog);
+        mainContainer.setCenter(res.getRoot());
+        updateNavState(addItemNavBtn);
     }
 
     @FXML
     public void showRequests() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/requests.fxml"));
-            Node view = loader.load();
-            RequestsController controller = loader.getController();
-            controller.init(rentalRepository, currentUser);
-            mainContainer.setCenter(view);
-            updateNavState(requestsNavBtn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/requests.fxml");
+        RequestsController controller = res.getController();
+        controller.init(rentalRepository, currentUser);
+        mainContainer.setCenter(res.getRoot());
+        updateNavState(requestsNavBtn);
     }
 
     @FXML
     public void showMyItems() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/my_items.fxml"));
-            Node view = loader.load();
-            MyItemsController controller = loader.getController();
-            controller.init(rentalRepository, currentUser);
-            mainContainer.setCenter(view);
-            updateNavState(myItemsNavBtn);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/my_items.fxml");
+        MyItemsController controller = res.getController();
+        controller.init(rentalRepository, currentUser);
+        mainContainer.setCenter(res.getRoot());
+        updateNavState(myItemsNavBtn);
     }
 
     @FXML
