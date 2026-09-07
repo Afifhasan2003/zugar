@@ -5,7 +5,6 @@ import com.zugar.model.RentalRequest;
 import com.zugar.model.User;
 import com.zugar.repository.RentalRepository;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -54,9 +53,10 @@ public class CatalogController {
 
         List<RentalItem> all = rentalRepository.findAllItems();
         List<RentalItem> filtered = all.stream().filter(item -> {
+            boolean isNotMine = currentUser == null || !item.getOwnerId().equals(currentUser.getId());
             boolean matchQuery = query.isEmpty() || item.getTitle().toLowerCase().contains(query) || item.getDescription().toLowerCase().contains(query);
             boolean matchCat = cat == null || cat.equals("All Categories") || item.getCategory().equalsIgnoreCase(cat);
-            return matchQuery && matchCat;
+            return isNotMine && matchQuery && matchCat;
         }).collect(Collectors.toList());
 
         itemsListView.setItems(FXCollections.observableArrayList(filtered));

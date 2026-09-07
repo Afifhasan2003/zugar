@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.zugar.ZugarAppTest" time="0.602" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.zugar.ZugarAppTest" time="0.891" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-25-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/saikat/projects/zugar/target/surefire/surefirebooter-20260907152734255_3.jar /home/saikat/projects/zugar/target/surefire 2026-09-07T15-27-34_165-jvmRun1 surefire-20260907152734255_1tmp surefire_0-20260907152734255_2tmp"/>
+    <property name="sun.java.command" value="/home/saikat/projects/zugar/target/surefire/surefirebooter-20260907153825452_3.jar /home/saikat/projects/zugar/target/surefire 2026-09-07T15-38-25_357-jvmRun1 surefire-20260907153825452_1tmp surefire_0-20260907153825452_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/saikat/projects/zugar/target/test-classes:/home/saikat/projects/zugar/target/classes:/home/saikat/.m2/repository/org/openjfx/javafx-controls/21.0.5/javafx-controls-21.0.5.jar:/home/saikat/.m2/repository/org/openjfx/javafx-controls/21.0.5/javafx-controls-21.0.5-linux.jar:/home/saikat/.m2/repository/org/openjfx/javafx-graphics/21.0.5/javafx-graphics-21.0.5.jar:/home/saikat/.m2/repository/org/openjfx/javafx-graphics/21.0.5/javafx-graphics-21.0.5-linux.jar:/home/saikat/.m2/repository/org/openjfx/javafx-base/21.0.5/javafx-base-21.0.5.jar:/home/saikat/.m2/repository/org/openjfx/javafx-base/21.0.5/javafx-base-21.0.5-linux.jar:/home/saikat/.m2/repository/org/openjfx/javafx-fxml/21.0.5/javafx-fxml-21.0.5.jar:/home/saikat/.m2/repository/org/openjfx/javafx-fxml/21.0.5/javafx-fxml-21.0.5-linux.jar:/home/saikat/.m2/repository/org/xerial/sqlite-jdbc/3.45.2.0/sqlite-jdbc-3.45.2.0.jar:/home/saikat/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/home/saikat/.m2/repository/io/jsonwebtoken/jjwt-api/0.12.6/jjwt-api-0.12.6.jar:/home/saikat/.m2/repository/io/jsonwebtoken/jjwt-impl/0.12.6/jjwt-impl-0.12.6.jar:/home/saikat/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.12.6/jjwt-jackson-0.12.6.jar:/home/saikat/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.7.1/jackson-databind-2.12.7.1.jar:/home/saikat/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar:/home/saikat/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar:/home/saikat/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/saikat/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/saikat/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/saikat/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/saikat/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/saikat/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/saikat/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/saikat/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/saikat/projects/zugar/target/surefire/surefirebooter-20260907152734255_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/saikat/projects/zugar/target/surefire/surefirebooter-20260907153825452_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.4+7-1-24.04-Ubuntu"/>
     <property name="user.name" value="saikat"/>
@@ -55,14 +55,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="testUserRegistrationAndLogin" classname="com.zugar.ZugarAppTest" time="0.441">
+  <testcase name="testUserRegistrationAndLogin" classname="com.zugar.ZugarAppTest" time="0.515">
     <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ]]></system-err>
   </testcase>
-  <testcase name="testJwtTokenParsingAndValidation" classname="com.zugar.ZugarAppTest" time="0.027"/>
-  <testcase name="testProjectFileRepositoryAndService" classname="com.zugar.ZugarAppTest" time="0.055"/>
-  <testcase name="testInvalidLoginThrowsException" classname="com.zugar.ZugarAppTest" time="0.022"/>
-  <testcase name="testDatabaseTablesCreated" classname="com.zugar.ZugarAppTest" time="0.019"/>
+  <testcase name="testJwtTokenParsingAndValidation" classname="com.zugar.ZugarAppTest" time="0.105"/>
+  <testcase name="testProjectFileRepositoryAndService" classname="com.zugar.ZugarAppTest" time="0.104"/>
+  <testcase name="testInvalidLoginThrowsException" classname="com.zugar.ZugarAppTest" time="0.065"/>
+  <testcase name="testDatabaseTablesCreated" classname="com.zugar.ZugarAppTest" time="0.061"/>
 </testsuite>

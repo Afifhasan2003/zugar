@@ -1,14 +1,18 @@
 package com.zugar.controller;
 
+import com.zugar.factory.ViewFactory;
 import com.zugar.model.RentalItem;
 import com.zugar.model.User;
 import com.zugar.repository.RentalRepository;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -43,6 +47,25 @@ public class MyItemsController {
         if (currentUser == null) return;
         List<RentalItem> items = rentalRepository.findItemsByOwner(currentUser.getId());
         myItemsListView.setItems(FXCollections.observableArrayList(items));
+    }
+
+    @FXML
+    private void handleOpenAddItemDialog() {
+        if (currentUser == null) return;
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Publish New Rental Listing");
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/add_item.fxml");
+        AddItemController controller = res.getController();
+        controller.init(rentalRepository, currentUser, () -> {
+            loadMyItems();
+            dialog.close();
+        });
+
+        dialog.getDialogPane().setContent(res.getRoot());
+        dialog.showAndWait();
     }
 
     private VBox createMyItemCard(RentalItem item) {

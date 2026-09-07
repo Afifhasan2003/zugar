@@ -1,6 +1,7 @@
 com/zugar/db/DatabaseManager.class
 com/zugar/controller/RegisterController.class
 com/zugar/service/AuthService.class
+com/zugar/controller/RequestsController$2.class
 com/zugar/model/ProjectFile.class
 com/zugar/model/User.class
 com/zugar/repository/UserRepository.class

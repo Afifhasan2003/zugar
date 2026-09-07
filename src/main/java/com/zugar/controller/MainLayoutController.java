@@ -13,7 +13,6 @@ public class MainLayoutController {
     @FXML private BorderPane mainContainer;
     @FXML private Label userLabel;
     @FXML private Button catalogNavBtn;
-    @FXML private Button addItemNavBtn;
     @FXML private Button requestsNavBtn;
     @FXML private Button myItemsNavBtn;
 
@@ -39,15 +38,6 @@ public class MainLayoutController {
         controller.init(rentalRepository, currentUser);
         mainContainer.setCenter(res.getRoot());
         updateNavState(catalogNavBtn);
-    }
-
-    @FXML
-    public void showAddItem() {
-        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/add_item.fxml");
-        AddItemController controller = res.getController();
-        controller.init(rentalRepository, currentUser, this::showCatalog);
-        mainContainer.setCenter(res.getRoot());
-        updateNavState(addItemNavBtn);
     }
 
     @FXML
@@ -77,7 +67,6 @@ public class MainLayoutController {
 
     private void updateNavState(Button activeBtn) {
         catalogNavBtn.getStyleClass().remove("nav-button-active");
-        addItemNavBtn.getStyleClass().remove("nav-button-active");
         requestsNavBtn.getStyleClass().remove("nav-button-active");
         myItemsNavBtn.getStyleClass().remove("nav-button-active");
         if (activeBtn != null && !activeBtn.getStyleClass().contains("nav-button-active")) {

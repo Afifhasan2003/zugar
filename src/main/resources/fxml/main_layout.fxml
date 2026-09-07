@@ -13,7 +13,6 @@
             <Label text="Zugar" styleClass="brand-label"/>
             <HBox spacing="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                 <Button fx:id="catalogNavBtn" text="Catalog" onAction="#showCatalog" styleClass="nav-button"/>
-                <Button fx:id="addItemNavBtn" text="+ List Item" onAction="#showAddItem" styleClass="nav-button"/>
                 <Button fx:id="requestsNavBtn" text="Requests" onAction="#showRequests" styleClass="nav-button"/>
                 <Button fx:id="myItemsNavBtn" text="My Items" onAction="#showMyItems" styleClass="nav-button"/>
             </HBox>

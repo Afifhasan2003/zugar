@@ -16,7 +16,8 @@ import javafx.scene.layout.VBox;
 import java.util.List;
 
 public class RequestsController {
-    @FXML private ListView<RentalRequest> requestsListView;
+    @FXML private ListView<RentalRequest> incomingListView;
+    @FXML private ListView<RentalRequest> sentListView;
 
     private RentalRepository rentalRepository;
     private User currentUser;
@@ -25,14 +26,26 @@ public class RequestsController {
         this.rentalRepository = rentalRepository;
         this.currentUser = currentUser;
 
-        requestsListView.setCellFactory(param -> new ListCell<>() {
+        incomingListView.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(RentalRequest req, boolean empty) {
                 super.updateItem(req, empty);
                 if (empty || req == null) {
                     setGraphic(null);
                 } else {
-                    setGraphic(createRequestCard(req));
+                    setGraphic(createIncomingRequestCard(req));
+                }
+            }
+        });
+
+        sentListView.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(RentalRequest req, boolean empty) {
+                super.updateItem(req, empty);
+                if (empty || req == null) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(createSentRequestCard(req));
                 }
             }
         });
@@ -42,11 +55,15 @@ public class RequestsController {
 
     public void loadRequests() {
         if (currentUser == null) return;
-        List<RentalRequest> requests = rentalRepository.findRequestsByOwner(currentUser.getId());
-        requestsListView.setItems(FXCollections.observableArrayList(requests));
+
+        List<RentalRequest> incoming = rentalRepository.findRequestsByOwner(currentUser.getId());
+        incomingListView.setItems(FXCollections.observableArrayList(incoming));
+
+        List<RentalRequest> sent = rentalRepository.findRequestsByRenter(currentUser.getId());
+        sentListView.setItems(FXCollections.observableArrayList(sent));
     }
 
-    private VBox createRequestCard(RentalRequest req) {
+    private VBox createIncomingRequestCard(RentalRequest req) {
         VBox card = new VBox(8);
         card.getStyleClass().add("card");
 
@@ -82,6 +99,33 @@ public class RequestsController {
         }
 
         card.getChildren().addAll(header, dates, status, actions);
+        return card;
+    }
+
+    private VBox createSentRequestCard(RentalRequest req) {
+        VBox card = new VBox(8);
+        card.getStyleClass().add("card");
+
+        RentalItem item = rentalRepository.findItemById(req.getItemId());
+        String itemTitle = item != null ? item.getTitle() : "Item #" + req.getItemId();
+
+        Label header = new Label("Sent Request: " + itemTitle);
+        header.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Label dates = new Label("Dates: " + req.getStartDate() + " to " + req.getEndDate() + " | Offered: ৳" + req.getOfferedPrice());
+        dates.setStyle("-fx-text-fill: #475569;");
+
+        Label badge = new Label("Status: " + req.getStatus());
+        if ("ACCEPTED".equals(req.getStatus())) {
+            badge.getStyleClass().add("badge-available");
+        } else {
+            badge.getStyleClass().add("badge-restricted");
+        }
+
+        Label msg = new Label("My Message: " + req.getMessage());
+        msg.setStyle("-fx-text-fill: #64748b;");
+
+        card.getChildren().addAll(header, dates, badge, msg);
         return card;
     }
 }

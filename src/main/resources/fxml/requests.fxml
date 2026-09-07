@@ -11,9 +11,16 @@
     <padding>
         <Insets top="20" right="24" bottom="20" left="24"/>
     </padding>
+
     <Label text="Rental Requests Dashboard" styleClass="title-label"/>
+
     <VBox spacing="10" VBox.vgrow="ALWAYS">
-        <Label text="Incoming &amp; Sent Rental Requests" styleClass="section-label"/>
-        <ListView fx:id="requestsListView" VBox.vgrow="ALWAYS"/>
+        <Label text="Incoming Requests (For My Items)" styleClass="section-label"/>
+        <ListView fx:id="incomingListView" VBox.vgrow="ALWAYS" prefHeight="200"/>
+    </VBox>
+
+    <VBox spacing="10" VBox.vgrow="ALWAYS">
+        <Label text="Sent Requests (My Rental Requests)" styleClass="section-label"/>
+        <ListView fx:id="sentListView" VBox.vgrow="ALWAYS" prefHeight="200"/>
     </VBox>
 </VBox>

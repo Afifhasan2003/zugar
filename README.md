@@ -1,11 +1,20 @@
 # zugar
-a peer-to-peer renting system
-
-# Peer-to-Peer Rental Marketplace
 
 A JavaFX-based peer-to-peer rental platform where users can list their personal belongings for rent and other users can discover, negotiate, and rent those items for a specific period.
 
 The system is designed around real-world rental workflows such as availability management, owner approval, price negotiation, access restrictions, security deposits, compensation, item condition tracking, and rental bundles.
+
+---
+
+## Application Screenshots
+
+| Login & Authentication | Item Discovery Catalog |
+| :---: | :---: |
+| <img src="login_page.png" width="400" alt="Login Page"/> | <img src="catelog.png" width="400" alt="Item Catalog"/> |
+
+| Rental Request Form | My Items Management |
+| :---: | :---: |
+| <img src="rental_request_form.png" width="400" alt="Rental Request Form"/> | <img src="my_items.png" width="400" alt="My Items"/> |
 
 ---
 
@@ -166,4 +175,6 @@ Design patterns implemented:
 - **Strategy**: `PasswordHasher.java`
 - **Template Method**: `Main.java`, `CatalogController.java`
 - **Observer**: `CatalogController.java`, `RequestsController.java`, `MyItemsController.java`
+
+
 
