@@ -7,32 +7,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.util.function.Consumer;
-
-public class LoginController {
+public class RegisterController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label statusLabel;
 
     private AuthService authService;
-    private Consumer<User> onLoginSuccess;
-    private Runnable onNavigateToRegister;
+    private Runnable onNavigateToLogin;
 
-    public void init(AuthService authService, Consumer<User> onLoginSuccess, Runnable onNavigateToRegister) {
+    public void init(AuthService authService, Runnable onNavigateToLogin) {
         this.authService = authService;
-        this.onLoginSuccess = onLoginSuccess;
-        this.onNavigateToRegister = onNavigateToRegister;
+        this.onNavigateToLogin = onNavigateToLogin;
     }
 
     @FXML
-    private void handleLogin() {
+    private void handleRegister() {
         String username = usernameField.getText();
         String password = passwordField.getText();
         try {
-            String token = authService.login(username, password);
-            User user = authService.validateAndGetUser(token);
-            if (user != null && onLoginSuccess != null) {
-                onLoginSuccess.accept(user);
+            User user = authService.register(username, password);
+            statusLabel.setStyle("-fx-text-fill: #16a34a;");
+            statusLabel.setText("Account created! Redirecting to login...");
+            if (onNavigateToLogin != null) {
+                onNavigateToLogin.run();
             }
         } catch (Exception e) {
             statusLabel.setStyle("-fx-text-fill: #ef4444;");
@@ -41,9 +38,9 @@ public class LoginController {
     }
 
     @FXML
-    private void showRegister() {
-        if (onNavigateToRegister != null) {
-            onNavigateToRegister.run();
+    private void showLogin() {
+        if (onNavigateToLogin != null) {
+            onNavigateToLogin.run();
         }
     }
 }

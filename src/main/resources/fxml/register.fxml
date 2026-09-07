@@ -9,26 +9,26 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.zugar.controller.LoginController"
+      fx:controller="com.zugar.controller.RegisterController"
       alignment="CENTER" spacing="16" styleClass="root">
     <padding>
         <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
     <VBox styleClass="card" maxWidth="400" spacing="14" alignment="CENTER_LEFT">
-        <Label text="Welcome Back to Zugar" styleClass="title-label"/>
-        <Label text="Peer-to-Peer Rental Marketplace" style="-fx-text-fill: #64748b;"/>
-        <Label fx:id="statusLabel" text="" style="-fx-text-fill: #ef4444; -fx-font-weight: bold;"/>
+        <Label text="Create your Zugar Account" styleClass="title-label"/>
+        <Label text="Join the Peer-to-Peer Rental Community" style="-fx-text-fill: #64748b;"/>
+        <Label fx:id="statusLabel" text="" style="-fx-font-weight: bold;"/>
         <VBox spacing="6">
             <Label text="Username" style="-fx-font-weight: bold;"/>
-            <TextField fx:id="usernameField" promptText="Enter your username"/>
+            <TextField fx:id="usernameField" promptText="Choose a username"/>
         </VBox>
         <VBox spacing="6">
             <Label text="Password" style="-fx-font-weight: bold;"/>
-            <PasswordField fx:id="passwordField" promptText="Enter your password"/>
+            <PasswordField fx:id="passwordField" promptText="Choose a password"/>
         </VBox>
         <VBox spacing="10" alignment="CENTER">
-            <Button text="Login" onAction="#handleLogin" styleClass="primary-button" maxWidth="Infinity"/>
-            <Hyperlink text="Don't have an account? Register" onAction="#showRegister" style="-fx-text-fill: #2563eb; -fx-font-weight: bold;"/>
+            <Button text="Create Account" onAction="#handleRegister" styleClass="primary-button" maxWidth="Infinity"/>
+            <Hyperlink text="Already have an account? Login" onAction="#showLogin" style="-fx-text-fill: #2563eb; -fx-font-weight: bold;"/>
         </VBox>
     </VBox>
 </VBox>

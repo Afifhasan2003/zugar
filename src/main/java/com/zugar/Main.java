@@ -2,6 +2,7 @@ package com.zugar;
 
 import com.zugar.controller.LoginController;
 import com.zugar.controller.MainLayoutController;
+import com.zugar.controller.RegisterController;
 import com.zugar.db.DatabaseManager;
 import com.zugar.factory.ViewFactory;
 import com.zugar.model.User;
@@ -40,7 +41,17 @@ public final class Main extends Application {
     private void showLoginView() {
         ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/login.fxml");
         LoginController controller = res.getController();
-        controller.init(authService, this::showMainLayout);
+        controller.init(authService, this::showMainLayout, this::showRegisterView);
+
+        Scene scene = new Scene(res.getRoot(), 900, 650);
+        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        primaryStage.setScene(scene);
+    }
+
+    private void showRegisterView() {
+        ViewFactory.ViewResult res = ViewFactory.loadView("/fxml/register.fxml");
+        RegisterController controller = res.getController();
+        controller.init(authService, this::showLoginView);
 
         Scene scene = new Scene(res.getRoot(), 900, 650);
         scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());

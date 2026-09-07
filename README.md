@@ -151,3 +151,19 @@ Suggested price: ৳1,000/day
 Rental duration: 3 days
 
 Renter's offer: ৳2,400 total
+```
+
+---
+
+## Design Patterns
+
+Design patterns implemented:
+
+- **Factory Method**: `ViewFactory.java`
+- **Builder**: `JwtService.java`
+- **Singleton**: `DatabaseManager.java`
+- **Facade**: `AuthService.java`, `ProjectFileService.java`
+- **Strategy**: `PasswordHasher.java`
+- **Template Method**: `Main.java`, `CatalogController.java`
+- **Observer**: `CatalogController.java`, `RequestsController.java`, `MyItemsController.java`
+
