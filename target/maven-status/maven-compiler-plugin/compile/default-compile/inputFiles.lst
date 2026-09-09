@@ -1,5 +1,9 @@
 /Users/anotherid/Desktop/zugar/src/main/java/com/zugar/Main.java
 /Users/anotherid/Desktop/zugar/src/main/java/com/zugar/ZugarApp.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/command/AcceptRequestCommand.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/command/Command.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/command/CounterOfferCommand.java
+/Users/anotherid/Desktop/zugar/src/main/java/com/zugar/command/RejectRequestCommand.java
 /Users/anotherid/Desktop/zugar/src/main/java/com/zugar/controller/AddItemController.java
 /Users/anotherid/Desktop/zugar/src/main/java/com/zugar/controller/CatalogController.java
 /Users/anotherid/Desktop/zugar/src/main/java/com/zugar/controller/LoginController.java

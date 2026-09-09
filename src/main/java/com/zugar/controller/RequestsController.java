@@ -1,5 +1,8 @@
 package com.zugar.controller;
 
+import com.zugar.command.AcceptRequestCommand;
+import com.zugar.command.CounterOfferCommand;
+import com.zugar.command.RejectRequestCommand;
 import com.zugar.model.RentalItem;
 import com.zugar.model.RentalRequest;
 import com.zugar.model.User;
@@ -7,8 +10,6 @@ import com.zugar.repository.RentalRepository;
 import com.zugar.state.RentalRequestState;
 import com.zugar.state.RentalRequestStateFactory;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,7 +46,7 @@ public class RequestsController {
                             setGraphic(createIncomingRequestCard(req));
                         }
                     }
-                }
+                };
             }
         });
 
@@ -62,7 +63,7 @@ public class RequestsController {
                             setGraphic(createSentRequestCard(req));
                         }
                     }
-                }
+                };
             }
         });
 
@@ -103,12 +104,9 @@ public class RequestsController {
         if (state.canAccept()) {
             Button acceptBtn = new Button("Accept");
             acceptBtn.getStyleClass().add("primary-button");
-            acceptBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    rentalRepository.updateRequestStatus(req.getId(), state.onAccept().toStatusString());
-                    loadRequests();
-                }
+            acceptBtn.setOnAction(e -> {
+                new AcceptRequestCommand(rentalRepository, req).execute();
+                loadRequests();
             });
 
             actions.getChildren().add(acceptBtn);
@@ -116,12 +114,9 @@ public class RequestsController {
         if (state.canReject()) {
             Button rejectBtn = new Button("Reject");
             rejectBtn.getStyleClass().add("danger-button");
-            rejectBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    rentalRepository.updateRequestStatus(req.getId(), state.onReject().toStatusString());
-                    loadRequests();
-                }
+            rejectBtn.setOnAction(e -> {
+                new RejectRequestCommand(rentalRepository, req).execute();
+                loadRequests();
             });
             actions.getChildren().add(rejectBtn);
         }
@@ -166,12 +161,9 @@ public class RequestsController {
             if (state.canAccept()) {
                 Button acceptButton = new Button("Accept counter-offer");
                 acceptButton.getStyleClass().add("primary-button");
-                acceptButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        rentalRepository.updateRequestStatus(req.getId(), state.onAccept().toStatusString());
-                        loadRequests();
-                    }
+                acceptButton.setOnAction(e -> {
+                    new AcceptRequestCommand(rentalRepository, req).execute();
+                    loadRequests();
                 });
                 actions.getChildren().add(acceptButton);
             }
@@ -187,19 +179,16 @@ public class RequestsController {
         counterPriceField.setPrefWidth(120);
 
         Button counterButton = new Button("Counter");
-        counterButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    double counterPrice = Double.parseDouble(counterPriceField.getText().trim());
-                    if (counterPrice <= 0) {
-                        return;
-                    }
-                    rentalRepository.updateCounterOffer(req.getId(), counterPrice);
-                    loadRequests();
-                } catch (NumberFormatException ignored) {
-                    counterPriceField.setPromptText("Enter a valid price");
+        counterButton.setOnAction(e -> {
+            try {
+                double counterPrice = Double.parseDouble(counterPriceField.getText().trim());
+                if (counterPrice <= 0) {
+                    return;
                 }
+                new CounterOfferCommand(rentalRepository, req, counterPrice).execute();
+                loadRequests();
+            } catch (NumberFormatException ignored) {
+                counterPriceField.setPromptText("Enter a valid price");
             }
         });
         actions.getChildren().addAll(counterPriceField, counterButton);
