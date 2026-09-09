@@ -23,7 +23,7 @@ public final class ZugarApp extends Application {
 
     @Override
     public void init() throws Exception {
-        DatabaseManager.initializeDatabase();
+        DatabaseManager.getInstance().initializeDatabase();
         UserRepository userRepository = new UserRepositoryImpl();
         JwtService jwtService = new JwtService("zugar-secret-key-for-jwt-signing-2026-p2p");
         this.authService = new AuthService(userRepository, jwtService);

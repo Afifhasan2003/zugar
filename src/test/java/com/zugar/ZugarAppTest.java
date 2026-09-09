@@ -38,8 +38,8 @@ public class ZugarAppTest {
     @BeforeEach
     public void setUp() throws SQLException {
         File dbFile = tempDir.resolve("test_zugar.db").toFile();
-        DatabaseManager.setDbUrl("jdbc:sqlite:" + dbFile.getAbsolutePath());
-        DatabaseManager.initializeDatabase();
+        DatabaseManager.getInstance().setDbUrl("jdbc:sqlite:" + dbFile.getAbsolutePath());
+        DatabaseManager.getInstance().initializeDatabase();
 
         userRepository = new UserRepositoryImpl();
         projectFileRepository = new ProjectFileRepositoryImpl();
@@ -50,7 +50,7 @@ public class ZugarAppTest {
 
     @Test
     public void testDatabaseTablesCreated() throws SQLException {
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT name FROM sqlite_master WHERE type='table'")) {
 

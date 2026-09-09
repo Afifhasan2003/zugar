@@ -16,7 +16,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void saveItem(RentalItem item) {
         String sql = "INSERT INTO rental_items (id, owner_id, title, category, description, price_per_day, deposit, condition, location, access_restriction, available) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, item.getId());
             ps.setString(2, item.getOwnerId());
@@ -38,7 +38,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public RentalItem findItemById(String id) {
         String sql = "SELECT * FROM rental_items WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -56,7 +56,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     public List<RentalItem> findAllItems() {
         String sql = "SELECT * FROM rental_items ORDER BY rowid DESC";
         List<RentalItem> items = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -72,7 +72,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     public List<RentalItem> findItemsByOwner(String ownerId) {
         String sql = "SELECT * FROM rental_items WHERE owner_id = ? ORDER BY rowid DESC";
         List<RentalItem> items = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, ownerId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -89,7 +89,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void updateItem(RentalItem item) {
         String sql = "UPDATE rental_items SET title=?, category=?, description=?, price_per_day=?, deposit=?, condition=?, location=?, access_restriction=?, available=? WHERE id=?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, item.getTitle());
             ps.setString(2, item.getCategory());
@@ -110,7 +110,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public boolean deleteItem(String id) {
         String sql = "DELETE FROM rental_items WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, id);
             return ps.executeUpdate() > 0;
@@ -122,7 +122,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void saveRequest(RentalRequest request) {
         String sql = "INSERT INTO rental_requests (id, item_id, renter_id, owner_id, start_date, end_date, offered_price, counter_price, status, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, request.getId());
             ps.setString(2, request.getItemId());
@@ -144,7 +144,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public RentalRequest findRequestById(String id) {
         String sql = "SELECT * FROM rental_requests WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -162,7 +162,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     public List<RentalRequest> findRequestsByOwner(String ownerId) {
         String sql = "SELECT * FROM rental_requests WHERE owner_id = ? ORDER BY rowid DESC";
         List<RentalRequest> list = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, ownerId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -180,7 +180,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     public List<RentalRequest> findRequestsByRenter(String renterId) {
         String sql = "SELECT * FROM rental_requests WHERE renter_id = ? ORDER BY rowid DESC";
         List<RentalRequest> list = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, renterId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -197,7 +197,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void updateRequestStatus(String id, String status) {
         String sql = "UPDATE rental_requests SET status = ? WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, status);
             ps.setString(2, id);
@@ -210,7 +210,7 @@ public class RentalRepositoryImpl implements RentalRepository {
     @Override
     public void updateCounterOffer(String id, double counterPrice) {
         String sql = "UPDATE rental_requests SET counter_price = ?, status = 'NEGOTIATING' WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseManager.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setDouble(1, counterPrice);
             ps.setString(2, id);
             ps.executeUpdate();

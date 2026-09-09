@@ -13,7 +13,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void save(User user) {
         String sql = "INSERT INTO users (id, username, password_hash, created_at) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getId());
@@ -32,7 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(String id) {
         String sql = "SELECT id, username, password_hash, created_at FROM users WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, id);
@@ -50,7 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findByUsername(String username) {
         String sql = "SELECT id, username, password_hash, created_at FROM users WHERE username = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);

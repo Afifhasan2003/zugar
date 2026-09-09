@@ -9,17 +9,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
-    private static String dbUrl = "jdbc:sqlite:zugar.db";
+    private static volatile DatabaseManager instance;
+    private String dbUrl = "jdbc:sqlite:zugar.db";
 
-    public static void setDbUrl(String newDbUrl) {
+    private DatabaseManager() {
+    }
+
+    public static DatabaseManager getInstance() {
+        if (instance == null) {
+            synchronized (DatabaseManager.class) {
+                if (instance == null) {
+                    instance = new DatabaseManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void setDbUrl(String newDbUrl) {
         dbUrl = newDbUrl;
     }
 
-    public static String getDbUrl() {
+    public String getDbUrl() {
         return dbUrl;
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         Connection conn = DriverManager.getConnection(dbUrl);
         try (Statement stmt = conn.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON;");
@@ -27,7 +42,7 @@ public class DatabaseManager {
         return conn;
     }
 
-    public static void initializeDatabase() throws SQLException {
+    public void initializeDatabase() throws SQLException {
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
 
@@ -88,7 +103,7 @@ public class DatabaseManager {
         }
     }
 
-    private static void addCounterPriceColumn(Statement stmt) throws SQLException {
+    private void addCounterPriceColumn(Statement stmt) throws SQLException {
         try {
             stmt.execute("ALTER TABLE rental_requests ADD COLUMN counter_price REAL");
         } catch (SQLException e) {
@@ -96,7 +111,7 @@ public class DatabaseManager {
         }
     }
 
-    private static void seedDummyData(Statement stmt) throws SQLException {
+    private void seedDummyData(Statement stmt) throws SQLException {
         try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users;")) {
             if (rs.next() && rs.getInt(1) > 0) {
                 return;

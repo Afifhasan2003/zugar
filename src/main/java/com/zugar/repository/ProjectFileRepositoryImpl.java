@@ -15,7 +15,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     @Override
     public void save(ProjectFile file) {
         String sql = "INSERT INTO project_files (id, user_id, filename, content, updated_at) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, file.getId());
@@ -35,7 +35,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     @Override
     public ProjectFile findById(String id) {
         String sql = "SELECT id, user_id, filename, content, updated_at FROM project_files WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, id);
@@ -54,7 +54,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     public List<ProjectFile> findByUserId(String userId) {
         String sql = "SELECT id, user_id, filename, content, updated_at FROM project_files WHERE user_id = ? ORDER BY updated_at DESC";
         List<ProjectFile> files = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, userId);
@@ -73,7 +73,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     public List<ProjectFile> findLatestByUserId(String userId, int limit) {
         String sql = "SELECT id, user_id, filename, content, updated_at FROM project_files WHERE user_id = ? ORDER BY updated_at DESC LIMIT ?";
         List<ProjectFile> files = new ArrayList<>();
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, userId);
@@ -92,7 +92,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     @Override
     public void update(ProjectFile file) {
         String sql = "UPDATE project_files SET filename = ?, content = ?, updated_at = ? WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             long now = System.currentTimeMillis() / 1000L;
@@ -111,7 +111,7 @@ public class ProjectFileRepositoryImpl implements ProjectFileRepository {
     @Override
     public boolean delete(String id) {
         String sql = "DELETE FROM project_files WHERE id = ?";
-        try (Connection conn = DatabaseManager.getConnection();
+        try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, id);
