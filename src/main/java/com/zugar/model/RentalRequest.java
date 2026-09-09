@@ -8,6 +8,7 @@ public class RentalRequest {
     private String startDate;
     private String endDate;
     private double offeredPrice;
+    private Double counterPrice;
     private String status;
     private String message;
 
@@ -15,6 +16,10 @@ public class RentalRequest {
     }
 
     public RentalRequest(String id, String itemId, String renterId, String ownerId, String startDate, String endDate, double offeredPrice, String status, String message) {
+        this(id, itemId, renterId, ownerId, startDate, endDate, offeredPrice, null, status, message);
+    }
+
+    public RentalRequest(String id, String itemId, String renterId, String ownerId, String startDate, String endDate, double offeredPrice, Double counterPrice, String status, String message) {
         this.id = id;
         this.itemId = itemId;
         this.renterId = renterId;
@@ -22,6 +27,7 @@ public class RentalRequest {
         this.startDate = startDate;
         this.endDate = endDate;
         this.offeredPrice = offeredPrice;
+        this.counterPrice = counterPrice;
         this.status = status;
         this.message = message;
     }
@@ -80,6 +86,14 @@ public class RentalRequest {
 
     public void setOfferedPrice(double offeredPrice) {
         this.offeredPrice = offeredPrice;
+    }
+
+    public Double getCounterPrice() {
+        return counterPrice;
+    }
+
+    public void setCounterPrice(Double counterPrice) {
+        this.counterPrice = counterPrice;
     }
 
     public String getStatus() {

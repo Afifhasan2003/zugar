@@ -70,6 +70,7 @@ public class DatabaseManager {
                     + "start_date TEXT NOT NULL, "
                     + "end_date TEXT NOT NULL, "
                     + "offered_price REAL NOT NULL, "
+                    + "counter_price REAL, "
                     + "status TEXT DEFAULT 'PENDING', "
                     + "message TEXT, "
                     + "FOREIGN KEY(item_id) REFERENCES rental_items(id), "
@@ -81,8 +82,17 @@ public class DatabaseManager {
             stmt.execute(createProjectFilesTable);
             stmt.execute(createRentalItemsTable);
             stmt.execute(createRentalRequestsTable);
+            addCounterPriceColumn(stmt);
 
             seedDummyData(stmt);
+        }
+    }
+
+    private static void addCounterPriceColumn(Statement stmt) throws SQLException {
+        try {
+            stmt.execute("ALTER TABLE rental_requests ADD COLUMN counter_price REAL");
+        } catch (SQLException e) {
+            if (!e.getMessage().toLowerCase().contains("duplicate column name")) throw e;
         }
     }
 

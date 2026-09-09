@@ -121,7 +121,7 @@ public class RentalRepositoryImpl implements RentalRepository {
 
     @Override
     public void saveRequest(RentalRequest request) {
-        String sql = "INSERT INTO rental_requests (id, item_id, renter_id, owner_id, start_date, end_date, offered_price, status, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO rental_requests (id, item_id, renter_id, owner_id, start_date, end_date, offered_price, counter_price, status, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, request.getId());
@@ -131,8 +131,10 @@ public class RentalRepositoryImpl implements RentalRepository {
             ps.setString(5, request.getStartDate());
             ps.setString(6, request.getEndDate());
             ps.setDouble(7, request.getOfferedPrice());
-            ps.setString(8, request.getStatus());
-            ps.setString(9, request.getMessage());
+            if (request.getCounterPrice() == null) ps.setNull(8, java.sql.Types.REAL);
+            else ps.setDouble(8, request.getCounterPrice());
+            ps.setString(9, request.getStatus());
+            ps.setString(10, request.getMessage());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error saving request", e);
@@ -205,6 +207,18 @@ public class RentalRepositoryImpl implements RentalRepository {
         }
     }
 
+    @Override
+    public void updateCounterOffer(String id, double counterPrice) {
+        String sql = "UPDATE rental_requests SET counter_price = ?, status = 'NEGOTIATING' WHERE id = ?";
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDouble(1, counterPrice);
+            ps.setString(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving counter offer", e);
+        }
+    }
+
     private RentalItem mapItem(ResultSet rs) throws SQLException {
         return new RentalItem(
                 rs.getString("id"),
@@ -230,6 +244,7 @@ public class RentalRepositoryImpl implements RentalRepository {
                 rs.getString("start_date"),
                 rs.getString("end_date"),
                 rs.getDouble("offered_price"),
+                rs.getObject("counter_price", Double.class),
                 rs.getString("status"),
                 rs.getString("message")
         );

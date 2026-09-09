@@ -3,9 +3,9 @@ com/zugar/factory/ViewFactory$ViewResult.class
 com/zugar/db/DatabaseManager.class
 com/zugar/controller/CatalogController.class
 com/zugar/controller/RegisterController.class
-com/zugar/service/AuthService.class
 com/zugar/controller/CatalogController$1.class
 com/zugar/controller/RequestsController$2.class
+com/zugar/service/AuthService.class
 com/zugar/factory/ViewFactory.class
 com/zugar/controller/AddItemController.class
 com/zugar/model/RentalRequest.class
@@ -18,8 +18,8 @@ com/zugar/model/User.class
 com/zugar/model/RentalItem.class
 com/zugar/repository/UserRepository.class
 com/zugar/service/JwtService.class
-com/zugar/service/ProjectFileService.class
 com/zugar/service/PasswordHasher.class
+com/zugar/service/ProjectFileService.class
 com/zugar/repository/UserRepositoryImpl.class
 com/zugar/ZugarApp.class
 com/zugar/repository/ProjectFileRepositoryImpl.class

@@ -17,4 +17,5 @@ public interface RentalRepository {
     List<RentalRequest> findRequestsByOwner(String ownerId);
     List<RentalRequest> findRequestsByRenter(String renterId);
     void updateRequestStatus(String id, String status);
+    void updateCounterOffer(String id, double counterPrice);
 }
