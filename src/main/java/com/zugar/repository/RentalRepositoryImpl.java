@@ -236,6 +236,9 @@ public class RentalRepositoryImpl implements RentalRepository {
     }
 
     private RentalRequest mapRequest(ResultSet rs) throws SQLException {
+        double counterPriceValue = rs.getDouble("counter_price");
+        Double counterPrice = rs.wasNull() ? null : counterPriceValue;
+
         return new RentalRequest(
                 rs.getString("id"),
                 rs.getString("item_id"),
@@ -244,7 +247,7 @@ public class RentalRepositoryImpl implements RentalRepository {
                 rs.getString("start_date"),
                 rs.getString("end_date"),
                 rs.getDouble("offered_price"),
-                rs.getObject("counter_price", Double.class),
+                counterPrice,
                 rs.getString("status"),
                 rs.getString("message")
         );
