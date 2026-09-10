@@ -178,3 +178,5 @@ Design patterns implemented:
 
 
 
+# run
+./mvnw javafx:run
